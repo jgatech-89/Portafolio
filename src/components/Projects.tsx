@@ -30,7 +30,7 @@ const projects = [
   {
   title: 'Integración de Pagos Multicanal',
   description:
-    'Implementación de un sistema de pagos en una plataforma existente, permitiendo transacciones con criptomonedas, tarjetas de crédito/débito y métodos digitales, manteniendo compatibilidad con la arquitectura previa.',
+    'Implementación de un sistema de pagos en una plataforma existente, permitiendo transacciones con tarjetas de crédito/débito y métodos digitales, manteniendo compatibilidad con la arquitectura previa.',
   image:
     'https://images.unsplash.com/photo-1642790106117-e829e14a795f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcnlwdG8lMjBwYXltZW50fGVufDF8fHx8MTc2NjQxOTAwMHww&ixlib=rb-4.1.0&q=80&w=1080',
   tags: ['Crypto Payments', 'Stripe', 'Web3', 'Node.js', 'React'],

@@ -69,7 +69,7 @@ export function Technologies() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 grid md:grid-cols-3 gap-8"
         >
-          <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-2xl">
+          {/* <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-2xl">
             <div className="text-4xl mb-2 text-blue-600 dark:text-blue-400">100+</div>
             <div className="text-gray-700 dark:text-gray-300">Proyectos Completados</div>
           </div>
@@ -80,7 +80,7 @@ export function Technologies() {
           <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-2xl">
             <div className="text-4xl mb-2 text-green-600 dark:text-green-400">5+</div>
             <div className="text-gray-700 dark:text-gray-300">Años de Experiencia</div>
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </section>

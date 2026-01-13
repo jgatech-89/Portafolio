@@ -16,6 +16,14 @@ const projects = [
     tags: ['Next.js', 'PostgreSQL', 'Prisma', 'AWS'],
   },
   {
+    title: 'Plataforma de gestión financiera y contable para empresas',
+    description:
+      'Sistema empresarial para la gestión de facturación, control financiero, conciliación de pagos y reportes contables, integrable con CRM y e-commerce.',
+    image:
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Python', 'PostgreSQL', 'Node.js', 'AWS'],
+  },
+  {
     title: 'Aplicación Móvil de Salud',
     description: 'App móvil de uso para personas con discapacidades.',
     image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXZlbG9wbWVudHxlbnwxfHx8fDE3NjY0MTYxMjV8MA&ixlib=rb-4.1.0&q=80&w=1080',

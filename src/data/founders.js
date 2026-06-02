@@ -14,7 +14,7 @@ export const founders = [
       'Especialista en diseño UX/UI y acompañamiento estratégico al cliente, transformando ideas y requerimientos en experiencias digitales efectivas.',
     image: placeholder('Alexandra Pena'),
     linkedin: 'https://www.linkedin.com/in/alexandra-isabel-pe%C3%B1a-cera-45a00a245',
-    portfolio: 'https://portafoliojga.netlify.app/',
+    portfolio: 'https://portafolio-lexa.netlify.app/',
   },
   {
     id: 'gabriela-castro',

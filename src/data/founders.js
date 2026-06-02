@@ -9,31 +9,31 @@ export const founders = [
   {
     id: 'alexandra-pena',
     name: 'Alexandra Isabel Peña Cera',
-    role: 'Full Stack Engineer & Co-Founder',
+    role: 'Desarrollador Frontend & Co-Founder',
     description:
-      'Especialista en desarrollo de software y soluciones digitales orientadas al crecimiento empresarial.',
+      'Especialista en diseño UX/UI y acompañamiento estratégico al cliente, transformando ideas y requerimientos en experiencias digitales efectivas.',
     image: placeholder('Alexandra Pena'),
-    linkedin: 'https://www.linkedin.com/in/alexandra-pena',
-    portfolio: 'https://portfolio.alexandrapena.dev',
+    linkedin: 'https://www.linkedin.com/in/alexandra-isabel-pe%C3%B1a-cera-45a00a245',
+    portfolio: 'https://portafoliojga.netlify.app/',
   },
   {
     id: 'gabriela-castro',
     name: 'Gabriela Castro Hernández',
-    role: 'Full Stack Engineer & Co-Founder',
+    role: 'DevOps & Backend · Co-Founder',
     description:
-      'Desarrolladora enfocada en la creación de experiencias digitales modernas y plataformas escalables.',
+      'Especialista en arquitectura backend, infraestructura cloud y automatización. Diseña soluciones escalables que conectan desarrollo, operación y rendimiento en un solo ecosistema tecnológico.',
     image: placeholder('Gabriela Castro'),
-    linkedin: 'https://www.linkedin.com/in/gabriela-castro',
-    portfolio: 'https://portfolio.gabrielacastro.dev',
+    linkedin: 'https://www.linkedin.com/in/gabriela-castro-hernandez-gch/',
+    portfolio: 'https://portfoliogch.netlify.app/',
   },
   {
     id: 'jose-ochoa',
     name: 'José Ochoa Cairoza',
-    role: 'Full Stack Engineer & Co-Founder',
+    role: 'Desarrollador Full Stack & Co-Founder',
     description:
-      'Especialista en arquitectura de software e integración de sistemas para entornos empresariales.',
+      'Desarrolla productos digitales de extremo a extremo, combinando interfaces modernas, lógica de negocio eficiente e integraciones tecnológicas de alto rendimiento.',
     image: placeholder('Jose Ochoa'),
-    linkedin: 'https://www.linkedin.com/in/jose-ochoa',
-    portfolio: 'https://portfolio.joseocha.dev',
+    linkedin: 'https://www.linkedin.com/in/jose-ochoa-cairoza-8b7003244',
+    portfolio: 'https://jdoc492.github.io/Portafolio/',
   },
 ];

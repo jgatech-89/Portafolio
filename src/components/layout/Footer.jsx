@@ -1,7 +1,6 @@
 import { Box, Container, Grid, IconButton, Link as MuiLink, Stack, Typography } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/EmailOutlined';
 import Logo from '../common/Logo';
 import { NAV_LINKS } from '../../config/navigation';
@@ -56,16 +55,6 @@ export default function Footer() {
                 sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#fff' } }}
               >
                 <GitHubIcon />
-              </IconButton>
-              <IconButton
-                component="a"
-                href={COMPANY.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram de JGA TECH"
-                sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#fff' } }}
-              >
-                <InstagramIcon />
               </IconButton>
             </Stack>
           </Grid>

@@ -25,10 +25,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { go } = useSmartNav();
 
-  // Cambio visual al hacer scroll.
   const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 24 });
 
-  // Bloquea scroll del fondo cuando el drawer está abierto.
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => {
@@ -43,6 +41,7 @@ export default function Navbar() {
   const goHome = () => {
     navigate('/');
     setOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -60,11 +59,8 @@ export default function Navbar() {
           color: 'text.primary',
         }}
       >
-        <Container>
-          <Toolbar
-            disableGutters
-            sx={{ minHeight: { xs: 64, md: 76 }, justifyContent: 'space-between' }}
-          >
+        <Container maxWidth="lg">
+          <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 72 }, justifyContent: 'space-between', gap: 2 }}>
             <Box
               component="a"
               href="/"
@@ -73,49 +69,57 @@ export default function Navbar() {
                 goHome();
               }}
               aria-label="Ir al inicio — JGA TECH"
-              sx={{ display: 'inline-flex', borderRadius: 1 }}
+              sx={{ display: 'inline-flex', borderRadius: 1, flexShrink: 0 }}
             >
               <Logo />
             </Box>
 
-            {/* Navegación de escritorio */}
             <Box
               component="nav"
               aria-label="Navegación principal"
-              sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}
+              sx={{
+                display: { xs: 'none', lg: 'flex' },
+                alignItems: 'center',
+                gap: 0.25,
+                flex: 1,
+                justifyContent: 'center',
+              }}
             >
               {NAV_LINKS.map((link) => (
                 <Button
-                  key={link.id}
+                  key={`${link.id}-${link.label}`}
                   onClick={() => handleNav(link)}
                   sx={{
                     color: 'text.primary',
-                    px: 1.8,
+                    px: 1.25,
+                    py: 0.75,
+                    minWidth: 0,
+                    fontSize: '0.875rem',
                     fontWeight: 500,
                     borderRadius: 999,
-                    '&:hover': { backgroundColor: 'rgba(10,10,10,0.05)', transform: 'none' },
+                    '&:hover': { backgroundColor: 'rgba(0,0,0,0.05)', transform: 'none' },
                   }}
                 >
                   {link.label}
                 </Button>
               ))}
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleNav(CONTACT_ANCHOR)}
-                sx={{ ml: 1.5 }}
-              >
-                Iniciar Proyecto
-              </Button>
             </Box>
 
-            {/* Botón hamburguesa (móvil) */}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleNav(CONTACT_ANCHOR)}
+              sx={{ display: { xs: 'none', md: 'inline-flex' }, flexShrink: 0, ml: 1 }}
+            >
+              Agendar Reunión
+            </Button>
+
             <IconButton
               edge="end"
               aria-label="Abrir menú de navegación"
               aria-expanded={open}
               onClick={() => setOpen(true)}
-              sx={{ display: { xs: 'inline-flex', md: 'none' }, color: 'text.primary' }}
+              sx={{ display: { xs: 'inline-flex', lg: 'none' }, color: 'text.primary' }}
             >
               <MenuIcon />
             </IconButton>
@@ -123,18 +127,20 @@ export default function Navbar() {
         </Container>
       </AppBar>
 
-      {/* Drawer móvil */}
       <Drawer
         anchor="right"
         open={open}
         onClose={() => setOpen(false)}
         PaperProps={{
-          sx: { width: { xs: '82%', sm: 340 }, bgcolor: 'background.default', px: 1, py: 2 },
+          sx: {
+            width: { xs: 'min(88vw, 360px)' },
+            bgcolor: 'background.paper',
+            px: 1,
+            py: 2,
+          },
         }}
       >
-        <Box
-          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 2, mb: 2 }}
-        >
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 2, mb: 2 }}>
           <Logo size="sm" />
           <IconButton aria-label="Cerrar menú" onClick={() => setOpen(false)}>
             <CloseIcon />
@@ -144,7 +150,7 @@ export default function Navbar() {
         <Box component="nav" aria-label="Navegación móvil">
           <List>
             {NAV_LINKS.map((link) => (
-              <ListItem key={link.id} disablePadding>
+              <ListItem key={`${link.id}-${link.label}`} disablePadding>
                 <ListItemButton onClick={() => handleNav(link)} sx={{ borderRadius: 2, py: 1.4 }}>
                   <ListItemText
                     primary={link.label}
@@ -164,7 +170,7 @@ export default function Navbar() {
             size="large"
             onClick={() => handleNav(CONTACT_ANCHOR)}
           >
-            Iniciar Proyecto
+            Agendar Reunión
           </Button>
         </Box>
       </Drawer>

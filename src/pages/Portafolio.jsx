@@ -7,7 +7,7 @@ export default function Portafolio() {
   useDocumentMeta({
     title: 'Portafolio | JGA TECH',
     description:
-      'Proyectos destacados de JGA TECH, como NOVA ACADEMIC: soluciones digitales que generan impacto real.',
+      'Proyectos destacados de JGA TECH: NOVA ACADEMIC, Lumet.beta y más soluciones digitales con impacto real.',
   });
 
   return (

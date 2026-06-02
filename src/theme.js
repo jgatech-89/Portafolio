@@ -5,6 +5,8 @@ const palette = {
   black: '#0A0A0A',
   white: '#FFFFFF',
   lightGray: '#F5F5F5',
+  surface: '#FAFAFA',
+  border: 'rgba(10,10,10,0.08)',
   mediumGray: '#BDBDBD',
 };
 

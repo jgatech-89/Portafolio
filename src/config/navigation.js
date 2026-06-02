@@ -2,9 +2,10 @@
 // `id`   -> ancla de la sección dentro de la Home (smooth scroll).
 // `path` -> ruta dedicada de React Router.
 export const NAV_LINKS = [
-  { label: 'Nosotros', id: 'nosotros', path: '/nosotros' },
+  { label: 'Inicio', id: 'inicio', path: '/' },
   { label: 'Servicios', id: 'servicios', path: '/servicios' },
-  { label: 'Portafolio', id: 'portafolio', path: '/portafolio' },
+  { label: 'Casos de Éxito', id: 'portafolio', path: '/portafolio' },
+  { label: 'Nosotros', id: 'nosotros', path: '/nosotros' },
   { label: 'Contacto', id: 'contacto', path: '/contacto' },
 ];
 

@@ -2,8 +2,12 @@ import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { motion } from 'framer-motion';
 import { CONTACT_ANCHOR } from '../../config/navigation';
+import { HERO_HEADLINE, HERO_SUBHEADLINE } from '../../config/hero';
 import { useSmartNav } from '../../hooks/useSmartNav';
-import { staggerContainer, fadeUp, fadeIn, scaleIn } from '../common/motionPresets';
+import { staggerContainer, fadeUp } from '../common/motionPresets';
+import HeroBadge from '../hero/HeroBadge';
+import HeroSocialProof from '../hero/HeroSocialProof';
+import HeroDashboard from '../hero/HeroDashboard';
 
 export default function HeroSection() {
   const { go } = useSmartNav();
@@ -15,15 +19,15 @@ export default function HeroSection() {
       aria-label="Presentación principal"
       sx={{
         position: 'relative',
-        minHeight: { xs: '92vh', md: '100vh' },
+        minHeight: { xs: 'auto', md: 'min(92vh, 900px)' },
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
         bgcolor: 'background.default',
-        pt: { xs: 12, md: 0 },
+        pt: { xs: 12, md: 14 },
+        pb: { xs: 8, md: 10 },
       }}
     >
-      {/* Capa decorativa de fondo (sutil, premium) */}
       <Box
         aria-hidden="true"
         sx={{
@@ -43,32 +47,19 @@ export default function HeroSection() {
             alignItems: 'center',
           }}
         >
-          {/* Columna de texto */}
-          <Box
-            component={motion.div}
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            <Typography
-              component={motion.p}
-              variants={fadeUp}
-              variant="overline"
-              sx={{ color: 'text.secondary', mb: 2 }}
-            >
-              Desarrollo de software · Consultoría · Innovación
-            </Typography>
+          <Box component={motion.div} variants={staggerContainer} initial="hidden" animate="visible">
+            <HeroBadge />
 
             <Typography
               component={motion.h1}
               variants={fadeUp}
               variant="h1"
               sx={{
-                fontSize: { xs: '2.6rem', sm: '3.4rem', md: '4.1rem' },
+                fontSize: { xs: '2.5rem', sm: '3.2rem', md: '3.75rem' },
                 maxWidth: 640,
               }}
             >
-              Convertimos ideas en soluciones digitales
+              {HERO_HEADLINE}
             </Typography>
 
             <Typography
@@ -78,12 +69,12 @@ export default function HeroSection() {
               sx={{
                 mt: 3,
                 color: 'text.secondary',
-                fontSize: { xs: '1.05rem', md: '1.25rem' },
+                fontSize: { xs: '1.05rem', md: '1.2rem' },
                 maxWidth: 560,
+                lineHeight: 1.7,
               }}
             >
-              Desarrollo de software, consultoría tecnológica e innovación para empresas que buscan
-              crecer y evolucionar.
+              {HERO_SUBHEADLINE}
             </Typography>
 
             <Stack
@@ -100,62 +91,59 @@ export default function HeroSection() {
                 endIcon={<ArrowForwardIcon />}
                 onClick={() => go(CONTACT_ANCHOR)}
               >
-                Hablemos de tu proyecto
+                Agendar Consultoría
               </Button>
               <Button
                 variant="outlined"
                 color="primary"
                 size="large"
-                onClick={() => go({ id: 'servicios', path: '/servicios' })}
+                onClick={() => go({ id: 'portafolio', path: '/portafolio' })}
               >
-                Explorar soluciones
+                Ver Casos de Éxito
               </Button>
             </Stack>
+
+            <HeroSocialProof />
           </Box>
 
-          {/* Columna visual */}
+          <HeroDashboard />
+        </Box>
+
+        <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 4 }}>
           <Box
-            component={motion.div}
-            variants={scaleIn}
-            initial="hidden"
-            animate="visible"
-            sx={{ position: 'relative', display: { xs: 'none', md: 'block' } }}
+            sx={{
+              borderRadius: 4,
+              bgcolor: 'common.black',
+              color: 'common.white',
+              p: 2.5,
+              boxShadow: '0 40px 80px -32px rgba(10,10,10,0.35)',
+            }}
           >
-            <Box
-              component="img"
-              loading="eager"
-              src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1100&q=80"
-              alt="Equipo de ingeniería de software colaborando frente a múltiples pantallas de código."
-              sx={{
-                width: '100%',
-                height: { md: 520 },
-                objectFit: 'cover',
-                borderRadius: 4,
-                boxShadow: '0 40px 80px -32px rgba(10,10,10,0.35)',
-              }}
-            />
-            {/* Tarjeta flotante de credibilidad */}
-            <Box
-              component={motion.div}
-              variants={fadeIn}
-              sx={{
-                position: 'absolute',
-                bottom: -28,
-                left: -28,
-                bgcolor: 'common.black',
-                color: 'common.white',
-                borderRadius: 3,
-                px: 3,
-                py: 2.2,
-                boxShadow: '0 24px 48px -20px rgba(10,10,10,0.5)',
-              }}
-            >
-              <Typography sx={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 700, lineHeight: 1 }}>
-                100%
-              </Typography>
-              <Typography sx={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem', mt: 0.5 }}>
-                soluciones a medida
-              </Typography>
+            <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.55)' }}>
+              Plataforma JGA
+            </Typography>
+            <Typography sx={{ fontWeight: 600, fontSize: '1rem', mt: 0.5 }}>
+              Software · IA · Automatización
+            </Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, mt: 2 }}>
+              {[
+                { l: 'KPIs', v: '24.8%' },
+                { l: 'APIs', v: '99.9%' },
+                { l: 'IA', v: 'ON' },
+              ].map((k) => (
+                <Box
+                  key={k.l}
+                  sx={{
+                    bgcolor: 'rgba(255,255,255,0.08)',
+                    borderRadius: 2,
+                    p: 1.25,
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  }}
+                >
+                  <Typography sx={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)' }}>{k.l}</Typography>
+                  <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, mt: 0.25 }}>{k.v}</Typography>
+                </Box>
+              ))}
             </Box>
           </Box>
         </Box>

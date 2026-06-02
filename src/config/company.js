@@ -4,13 +4,12 @@
 
 export const COMPANY = {
   name: 'JGA TECH',
-  email: import.meta.env.VITE_EMAIL_EMPRESA || 'contacto@jgatech.dev',
-  whatsapp: import.meta.env.VITE_WHATSAPP_EMPRESA || '573000000000',
+  email: import.meta.env.VITE_EMAIL_EMPRESA || 'jgatech89@gmail.com',
+  whatsapp: import.meta.env.VITE_WHATSAPP_EMPRESA || '573147178918',
   city: import.meta.env.VITE_CIUDAD_EMPRESA || 'Barranquilla, Colombia',
   social: {
-    linkedin: 'https://www.linkedin.com/company/jga-tech',
-    github: 'https://github.com/jga-tech',
-    instagram: 'https://www.instagram.com/jga.tech',
+    linkedin: 'https://www.linkedin.com/company/jga-tech/',
+    github: 'https://github.com/jgatech-89',
   },
 };
 

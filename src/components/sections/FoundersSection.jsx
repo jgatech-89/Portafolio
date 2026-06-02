@@ -20,11 +20,15 @@ export default function FoundersSection() {
           variant="fadeUp"
           stagger
           sx={{
-            mt: { xs: 5, md: 8 },
+            mt: { xs: 4, md: 6 },
             display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-            gap: { xs: 4, md: 4 },
-            maxWidth: { sm: 560, md: 'none' },
+            gridTemplateColumns: {
+              xs: 'minmax(0, 280px)',
+              sm: 'repeat(2, minmax(0, 240px))',
+              md: 'repeat(3, minmax(0, 260px))',
+            },
+            justifyContent: 'center',
+            gap: { xs: 2.5, md: 3 },
             mx: 'auto',
           }}
         >
@@ -35,19 +39,19 @@ export default function FoundersSection() {
                 sx={{
                   height: '100%',
                   overflow: 'hidden',
-                  borderRadius: 4,
+                  borderRadius: 3,
                   border: '1px solid',
                   borderColor: 'divider',
                   bgcolor: 'background.default',
                   transition: 'transform .35s ease, box-shadow .35s ease',
                   '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 36px 70px -34px rgba(10,10,10,0.34)',
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 20px 40px -24px rgba(10,10,10,0.28)',
                   },
                   '&:hover img': { transform: 'scale(1.04)' },
                 }}
               >
-                <Box sx={{ overflow: 'hidden', aspectRatio: '4 / 5', bgcolor: 'common.black' }}>
+                <Box sx={{ overflow: 'hidden', aspectRatio: '1 / 1', bgcolor: 'common.black' }}>
                   <Box
                     component="img"
                     loading="lazy"
@@ -62,20 +66,23 @@ export default function FoundersSection() {
                   />
                 </Box>
 
-                <Box sx={{ p: 3 }}>
-                  <Typography variant="h6" component="h3" sx={{ fontSize: '1.15rem' }}>
+                <Box sx={{ p: 2 }}>
+                  <Typography variant="h6" component="h3" sx={{ fontSize: '1rem', lineHeight: 1.3 }}>
                     {person.name}
                   </Typography>
                   <Typography
-                    sx={{ color: 'text.secondary', fontWeight: 600, fontSize: '0.85rem', mt: 0.5 }}
+                    sx={{ color: 'text.secondary', fontWeight: 600, fontSize: '0.78rem', mt: 0.35 }}
                   >
                     {person.role}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1.5 }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: 'text.secondary', mt: 1, fontSize: '0.8rem', lineHeight: 1.55 }}
+                  >
                     {person.description}
                   </Typography>
 
-                  <Stack direction="row" spacing={1} sx={{ mt: 2.5 }}>
+                  <Stack direction="row" spacing={0.75} sx={{ mt: 1.75 }}>
                     <Tooltip title="LinkedIn">
                       <IconButton
                         component="a"
@@ -83,13 +90,14 @@ export default function FoundersSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`LinkedIn de ${person.name}`}
+                        size="small"
                         sx={{
                           border: '1px solid',
                           borderColor: 'divider',
                           '&:hover': { bgcolor: 'common.black', color: 'common.white' },
                         }}
                       >
-                        <LinkedInIcon fontSize="small" />
+                        <LinkedInIcon sx={{ fontSize: 18 }} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Portafolio">
@@ -99,13 +107,14 @@ export default function FoundersSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Portafolio de ${person.name}`}
+                        size="small"
                         sx={{
                           border: '1px solid',
                           borderColor: 'divider',
                           '&:hover': { bgcolor: 'common.black', color: 'common.white' },
                         }}
                       >
-                        <LaunchIcon fontSize="small" />
+                        <LaunchIcon sx={{ fontSize: 18 }} />
                       </IconButton>
                     </Tooltip>
                   </Stack>

@@ -3,7 +3,7 @@ import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
 import HubOutlinedIcon from '@mui/icons-material/HubOutlined';
 import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 import { motion } from 'framer-motion';
-import { fadeRight, scaleIn } from '../common/motionPresets';
+import { scaleIn } from '../common/motionPresets';
 
 const glassDark = {
   bgcolor: 'rgba(10,10,10,0.94)',

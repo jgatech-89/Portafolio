@@ -1,110 +1,55 @@
-# JGA TECH — Landing corporativa
+# Scale Labs — Portafolio
 
-Landing page premium para **JGA TECH** (desarrollo de software y consultoría tecnológica). Construida con React + Vite, Material UI, Framer Motion y React Router. Diseño minimalista en blanco y negro, mobile-first, accesible (AA) y con SEO básico.
+Portafolio de proyectos de **Scale Labs**. One-page, Next.js 15 (App Router) +
+TypeScript + Tailwind CSS v4, animado con GSAP/ScrollTrigger y scroll suave con
+Lenis. Dockerizado.
 
-## Stack
-
-- **React 18** + **Vite 5**
-- **Material UI 5** (`@mui/material`, `@mui/icons-material`)
-- **Framer Motion** (animaciones discretas: fade up/left/right, scale, stagger)
-- **React Router 6** (rutas + lazy loading)
-
-## Requisitos
-
-- **Node.js 18 o superior** (Vite 5 no soporta Node 16).
-
-## Instalación y ejecución
-
-```bash
-npm install
-npm run dev      # servidor de desarrollo en http://localhost:5173
-npm run build    # build de producción en /dist
-npm run preview  # sirve el build localmente
-```
-
-### Variables de entorno
-
-Copia `.env.example` a `.env` y completa los datos de contacto:
-
-```
-VITE_EMAIL_EMPRESA=contacto@jgatech.dev
-VITE_WHATSAPP_EMPRESA=573000000000
-VITE_CIUDAD_EMPRESA=Barranquilla, Colombia
-```
-
-Si no defines `.env`, se usan valores por defecto seguros (ver `src/config/company.js`).
-
-## Ejecución con Docker (recomendado en este equipo)
-
-Como en esta máquina `npm`/Node están limitados, Docker es la vía más simple: el
-contenedor trae su propio Node 20.
-
-```bash
-# Desarrollo con hot-reload  ->  http://localhost:5173
-docker compose up dev
-
-# Producción (build + nginx) ->  http://localhost:8080
-docker compose up prod --build
-
-# Detener
-docker compose down
-```
-
-- `Dockerfile` es multi-stage: `dev` (Vite), `build` (genera `/dist`) y `prod`
-  (nginx sirviendo los estáticos, con fallback SPA configurado en `nginx.conf`).
-- El servicio `dev` monta el código como volumen, por lo que los cambios se
-  reflejan al instante (polling activado para Windows/macOS).
-- Para inyectar datos de contacto en producción, define `VITE_*` en un `.env`
-  antes de construir (`docker compose build prod`).
+Comparte arquitectura y sistema visual con el landing de Scale Labs
+(`Desktop/Landing-Scale`): mismos tokens de marca (`src/app/globals.css`),
+misma tipografía (Inter), mismas primitivas de animación (`src/components/ui/`).
+**No repite las secciones del landing** (equipo, servicios, métricas, FAQ) — este
+sitio es solo el trabajo construido.
 
 ## Estructura
 
 ```
 src/
-  pages/        Home, Nosotros, Servicios, Portafolio, Contacto, NotFound
+  app/            layout, page, globals.css (tokens de marca)
   components/
-    layout/     Navbar, Footer, ScrollToTop
-    sections/   Hero, About, MissionVisionValues, Differential, Founders,
-                Services, Portfolio, CTA, Contact
-    common/     AnimatedContainer, AnimatedItem, SectionTitle, PageWrapper, Logo
-  data/         founders.js, services.js, portfolio.js
-  config/       company.js, navigation.js
-  hooks/        useSmartNav.js, useDocumentMeta.js
-  routes/       AppRoutes.jsx (lazy loading)
-  theme.js      Tema MUI (paleta + tipografías Playfair Display / Inter)
+    layout/       Navbar (sin enlaces de sección), Footer
+    sections/     Hero · Work · Approach · CTA
+    ui/           Reveal, SplitReveal, Magnetic, Parallax, StaircaseTag,
+                  CustomCursor, PageLoader, Button, ContactOptions, SectionHeading
+    providers/    SmoothScroll (Lenis + GSAP)
+  data/           site.ts (contacto — NO se traduce)
+  i18n/           dictionary.ts (ES/EN) + LocaleProvider
+  lib/            gsap, hooks, utils, fonts, scrollColorFade
+public/
+  logo/           SVG de marca (isotipo + lockups) de scale-labs-identidad/
+  projects/       Capturas de cada proyecto
 ```
 
-## Navegación
+## Contenido
 
-Funciona de dos formas, gestionadas por `useSmartNav`:
+- **Proyectos:** `src/i18n/dictionary.ts` → `work.projects` (ES y EN). Cada uno con
+  portada, galería, features, stack y `rightsReserved`.
+- **Contacto:** `src/data/site.ts` — email `scalelabs.info@gmail.com`,
+  WhatsApp `573023694545`. `url` y `social` siguen en placeholder.
 
-- **Por rutas:** `/`, `/nosotros`, `/servicios`, `/portafolio`, `/contacto`.
-- **Por scroll:** desde la Home, los enlaces hacen *smooth scroll* a la sección
-  correspondiente. `ScrollToTop` sube al inicio al cambiar de ruta (o desplaza al
-  ancla si la URL trae `#seccion`).
+## Docker
 
-## Personalización rápida
+```bash
+# Producción (Next standalone) — http://localhost:3003
+docker compose up -d --build scale-portfolio
 
-- **Fundadores:** `src/data/founders.js` (reemplaza las imágenes placeholder por
-  fotos reales en `/public`).
-- **Servicios:** `src/data/services.js`.
-- **Proyectos:** `src/data/portfolio.js` (estructura lista para añadir más).
-- **Colores / tipografía:** `src/theme.js`.
+# Desarrollo con hot-reload — http://localhost:3003
+docker compose --profile dev up --build scale-portfolio-dev
+```
 
-## Despliegue
+Puerto 3003 (el landing usa 3002; la vieja landing en Vite usaba 5173 / 8080).
 
-Incluye `vercel.json` (Vercel) y `public/_redirects` (Netlify) para que el
-enrutado SPA funcione en recargas de rutas profundas. Publica la carpeta `dist/`.
+## Pendiente antes de publicar
 
----
-
-> ⚠️ **Nota sobre el entorno de desarrollo actual:** en esta máquina `npm` está
-> configurado con un *prefix* global que apunta a `C:\Users\admin_intune` (perfil
-> Intune sin permisos) y Node es la v16. Para trabajar este proyecto:
->
-> 1. Instala/activa **Node 18+** (por ejemplo con `nvm use 18`).
-> 2. Si `npm` sigue fallando con `EPERM ... admin_intune`, ejecuta
->    `npm config set prefix "$env:APPDATA\npm"` para mover el prefix global a una
->    ruta con permisos, y reinicia la terminal.
-
-🤖 Generado con [Claude Code](https://claude.com/claude-code)
+- `src/data/site.ts` → `url` (dominio real, alimenta `metadataBase` / Open Graph)
+  y `social` (cuentas reales; el Footer no muestra el ícono sin href).
+- Deploy a Vercel cuando esté el dominio.

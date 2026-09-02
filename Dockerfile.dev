@@ -1,0 +1,15 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@10 --activate
+
+# Installing deps first (before the rest of the source) keeps this layer
+# cached across rebuilds when only app code changes.
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --no-frozen-lockfile
+
+COPY . .
+
+EXPOSE 3003
+CMD ["pnpm", "exec", "next", "dev", "-H", "0.0.0.0", "-p", "3003"]

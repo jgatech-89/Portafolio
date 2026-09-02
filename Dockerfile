@@ -1,31 +1,41 @@
-# ---------- Base ----------
-# Node 20 LTS sobre Alpine (resuelve el problema de Node 16 del host).
-FROM node:20-alpine AS base
+# syntax=docker/dockerfile:1
+
+# ---- Base image with pnpm enabled ----
+FROM node:22-alpine AS base
+RUN corepack enable && corepack prepare pnpm@10 --activate
 WORKDIR /app
 
-# ---------- Dependencias ----------
+# ---- Install dependencies (cached while package.json/lockfile don't change) ----
 FROM base AS deps
-# package-lock.json* es opcional (el glob evita fallar si aún no existe).
-COPY package.json package-lock.json* ./
-RUN npm install
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --no-frozen-lockfile
 
-# ---------- Desarrollo (Vite dev server con hot-reload) ----------
-FROM base AS dev
-ENV NODE_ENV=development
+# ---- Build the application ----
+FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-EXPOSE 5173
-CMD ["npm", "run", "dev"]
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN pnpm build
 
-# ---------- Build de producción ----------
-FROM deps AS build
+# ---- Production runtime image ----
+FROM base AS runner
 ENV NODE_ENV=production
-COPY . .
-RUN npm run build
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# ---------- Producción (estáticos servidos por nginx) ----------
-FROM nginx:1.27-alpine AS prod
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+RUN addgroup --system --gid 1001 nodejs \
+  && adduser --system --uid 1001 nextjs
+
+# `output: "standalone"` (next.config.ts) traces only the files the server
+# actually needs, so the runtime image doesn't carry the full node_modules.
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+# 3003 keeps this clear of the Scale Labs landing (3002) and the old
+# Vite portfolio (5173 / nginx 8080).
+ENV PORT=3003
+EXPOSE 3003
+
+CMD ["node", "server.js"]

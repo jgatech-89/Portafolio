@@ -1,36 +1,35 @@
 {
-  "name": "jga-tech-landing",
+  "name": "scale-labs-portfolio",
+  "version": "0.1.0",
   "private": true,
-  "version": "1.0.0",
   "type": "module",
-  "description": "Landing page corporativa premium de JGA TECH — desarrollo de software y consultoría tecnológica.",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.18",
-    "@mui/material": "^5.15.18",
-    "framer-motion": "^11.2.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1"
+    "@gsap/react": "^2.1.2",
+    "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.25",
+    "lucide-react": "^0.475.0",
+    "next": "^15.5.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.2",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "vite": "^5.2.11"
-  },
-  "engines": {
-    "node": ">=18"
+    "@eslint/eslintrc": "^3.2.0",
+    "@tailwindcss/postcss": "^4.3.2",
+    "@types/node": "^20",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9",
+    "eslint-config-next": "^15.5.0",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^4.3.2",
+    "typescript": "^5"
   }
 }

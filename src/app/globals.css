@@ -1,0 +1,290 @@
+@import "tailwindcss";
+
+/* Registradas para que la transición entre valores sea interpolada (suave)
+   en vez de un salto — usadas por el resplandor que sigue al cursor en
+   "Sobre Scale Labs". Sin este registro, un `transition` sobre una custom
+   property se trata como discreto. */
+@property --mx {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+@property --my {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 35%;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — valores tomados 1:1 del manual de identidad        */
+/*  (scale-labs-identidad/LEEME.md). No inventar valores nuevos aquí;  */
+/*  cualquier cambio de marca debe partir del manual.                  */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Naranja / coral */
+  --color-coral: #ff5a43;
+  --color-coral-deep: #db4530;
+  --color-coral-edge: #ff6e5a;
+  --color-coral-edge-deep: #df5b49;
+
+  /* Carbón */
+  --color-carbon: #1f2937;
+  --color-carbon-deep: #0f172a;
+  --color-carbon-edge: #353e4b;
+  --color-carbon-edge-deep: #272e3f;
+
+  /* Fondos recomendados */
+  --color-bg-light: #fcfcfb;
+  --color-bg-dark: #101827;
+
+  /* Neutrales de apoyo */
+  --color-gray: #9ca3af;
+  --color-text-secondary: #6b7280;
+
+  /* Tipografía — Inter es la única fuente de interfaz (ver manual) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Escala fluida */
+  /* "SCALE" del hero: tamaño relativo al ancho de su propio contenedor
+     (container query units), no al viewport — así llena siempre el mismo
+     porcentaje del ancho disponible, en cualquier pantalla, en vez de topar
+     con un tamaño máximo fijo. */
+  --text-mega: 26cqw;
+  --text-mega--line-height: 0.85;
+  --text-mega-sub: 8cqw;
+  --text-mega-sub--line-height: 1.1;
+  --text-hero: clamp(2.75rem, 1.2rem + 6.6vw, 6.25rem);
+  --text-hero--line-height: 0.98;
+  --text-display: clamp(2.25rem, 1.2rem + 4.6vw, 4rem);
+  --text-display--line-height: 1.04;
+  --text-headline: clamp(1.6rem, 1.1rem + 2vw, 2.25rem);
+  --text-headline--line-height: 1.15;
+  --text-eyebrow: 0.78rem;
+
+  /* Radios */
+  --radius-sm: 0.625rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+
+  /* Movimiento */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: light;
+  --page-x: clamp(1.25rem, 4vw, 4.5rem);
+}
+
+/* En @layer base para que las utilidades de borde de Tailwind (capa
+   "utilities") puedan pisar este valor por defecto — sin layer, una regla
+   sin capa le gana a cualquier utilidad sin importar la especificidad. */
+@layer base {
+  * {
+    border-color: var(--color-gray);
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-light);
+  color: var(--color-carbon-deep);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: var(--color-coral);
+  color: var(--color-bg-light);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Lenis smooth scroll                                                */
+/* ------------------------------------------------------------------ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Utilidades                                                         */
+/* ------------------------------------------------------------------ */
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 84rem;
+  padding-inline: var(--page-x);
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-coral-deep);
+}
+
+@utility section-y {
+  padding-block: clamp(4rem, 3rem + 5vw, 7.5rem);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-out-expo);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Keyframes                                                          */
+/* ------------------------------------------------------------------ */
+/* Traslada exactamente el ancho de UNA copia del track de LogoMarquee, que
+   repite el arreglo de clientes 6 veces (ver LogoMarquee.tsx) — por eso es
+   -1/6 (16.6667%) y no -50%. Con solo 4 clientes y nada más que 2 copias,
+   el "vuelta" se ve a simple vista (cabe casi entera en una pantalla ancha
+   y se nota clarísimo el corte); con 6 copias el recorrido es mucho más
+   largo antes de repetirse y se siente continuo/infinito de verdad. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-16.6667%);
+  }
+}
+
+/* Sello circular giratorio (collage de "Nuestro equipo"). */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Resplandor de fondo que deriva lentamente (sección "Sobre Scale Labs"). */
+@keyframes drift {
+  from {
+    transform: translate(-4%, -2%) scale(1);
+  }
+  to {
+    transform: translate(4%, 3%) scale(1.08);
+  }
+}
+
+/* Punto que viaja a lo largo del conector entre etapas (sección "Sobre
+   Scale Labs"). Versión horizontal y vertical (mobile). */
+@keyframes pulse-travel-x {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+@keyframes pulse-travel-y {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Punto que "sube" por la línea en escalera junto a "Labs" (Hero) — los
+   mismos ocho puntos del polyline de la escalera (viewBox 24x56, ver
+   Hero.tsx), expresados en % para que calcen con la posición absoluta del
+   punto dentro de un contenedor del mismo tamaño (h-14 w-6 = 56x24px). Va
+   de abajo hacia arriba (sube, como "escalar"), no al revés. */
+@keyframes staircase-climb {
+  0% {
+    left: 8.33%;
+    top: 96.43%;
+  }
+  14% {
+    left: 8.33%;
+    top: 71.43%;
+  }
+  28% {
+    left: 37.5%;
+    top: 71.43%;
+  }
+  42% {
+    left: 37.5%;
+    top: 46.43%;
+  }
+  57% {
+    left: 66.67%;
+    top: 46.43%;
+  }
+  71% {
+    left: 66.67%;
+    top: 21.43%;
+  }
+  85% {
+    left: 95.83%;
+    top: 21.43%;
+  }
+  100% {
+    left: 95.83%;
+    top: 3.57%;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Accesibilidad                                                      */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-coral-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

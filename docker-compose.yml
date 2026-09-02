@@ -1,34 +1,28 @@
-# Uso:
-#   Desarrollo (hot-reload):  docker compose up dev      -> http://localhost:5173
-#   Producción (nginx):       docker compose up prod      -> http://localhost:8080
-#
-# Las variables VITE_* se leen desde un archivo .env si existe (opcional;
-# hay valores por defecto en src/config/company.js).
-
 services:
-  # Servidor de desarrollo con recarga en caliente.
-  dev:
+  scale-portfolio:
     build:
       context: .
-      target: dev
+      dockerfile: Dockerfile
     ports:
-      - "5173:5173"
-    volumes:
-      # Monta el código para reflejar cambios al instante...
-      - .:/app
-      # ...pero conserva node_modules del contenedor (no usa los del host).
-      - /app/node_modules
+      - "3003:3003"
     environment:
-      - CHOKIDAR_USEPOLLING=true
-    env_file:
-      - path: .env
-        required: false
+      - PORT=3003
+      - NODE_ENV=production
+    restart: unless-stopped
 
-  # Build estático servido por nginx (imagen lista para producción).
-  prod:
+  # `docker compose --profile dev up scale-portfolio-dev` — hot-reloading dev
+  # server with the local source mounted in.
+  scale-portfolio-dev:
+    profiles: ["dev"]
     build:
       context: .
-      target: prod
+      dockerfile: Dockerfile.dev
     ports:
-      - "8080:80"
-    restart: unless-stopped
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next

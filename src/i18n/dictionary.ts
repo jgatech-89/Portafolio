@@ -232,7 +232,7 @@ export const dictionary: Record<Locale, Dictionary> = {
       { label: "Contacto", href: "#contacto" },
     ],
     hero: {
-      topLine: "Scale Labs · Portafolio de proyectos",
+      topLine: "Scale Labs · 2026 · Software construido para escalar",
       mega: "Casos",
       megaAccent: "reales",
       tagPhrase: "Producto, software y automatización llevados a producción.",
@@ -299,7 +299,7 @@ export const dictionary: Record<Locale, Dictionary> = {
       { label: "Contact", href: "#contacto" },
     ],
     hero: {
-      topLine: "Scale Labs · Project portfolio",
+      topLine: "Scale Labs · 2026 · Software built to scale",
       mega: "Cases",
       megaAccent: "real",
       tagPhrase: "Product, software and automation taken to production.",

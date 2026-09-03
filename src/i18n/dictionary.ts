@@ -85,10 +85,6 @@ export interface Dictionary {
     stack: string[];
     steps: { title: string; description: string }[];
   };
-  cta: {
-    title: string;
-    description: string;
-  };
   footer: {
     tagline: string;
     backToSite: string;
@@ -96,8 +92,45 @@ export interface Dictionary {
     builtBy: string;
   };
   contact: {
+    /** Etiquetas de los canales directos (las usa `ContactOptions`). */
     whatsapp: string;
     call: string;
+    /** Sección de contacto (formulario que abre WhatsApp con el resumen). */
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    infoTitle: string;
+    infoSubtitle: string;
+    emailLabel: string;
+    whatsappLabel: string;
+    locationLabel: string;
+    city: string;
+    fields: {
+      name: string;
+      email: string;
+      company: string;
+      phone: string;
+      projectType: string;
+      projectTypePlaceholder: string;
+      message: string;
+    };
+    projectTypes: string[];
+    submit: string;
+    success: string;
+    errors: {
+      name: string;
+      email: string;
+      emailInvalid: string;
+      phoneInvalid: string;
+      projectType: string;
+      message: string;
+      messageShort: string;
+    };
+    /** Saludo con el que arranca el mensaje de WhatsApp. */
+    waGreeting: string;
+    waCompany: string;
+    waType: string;
+    waMessage: string;
   };
   a11y: {
     openMenu: string;
@@ -270,11 +303,6 @@ export const dictionary: Record<Locale, Dictionary> = {
         { title: "Producción", description: "Despliegue dockerizado, datos y soporte para que el producto siga creciendo." },
       ],
     },
-    cta: {
-      title: "¿Tienes un proyecto parecido en mente?",
-      description:
-        "Cuéntanos qué necesitas construir. La primera llamada es para entender el problema, no para vender.",
-    },
     footer: {
       tagline: "Portafolio de proyectos de Scale Labs.",
       backToSite: "Ir al sitio principal",
@@ -284,6 +312,50 @@ export const dictionary: Record<Locale, Dictionary> = {
     contact: {
       whatsapp: "Escríbenos por WhatsApp",
       call: "Llamar",
+      eyebrow: "Contacto",
+      title: "Hablemos de tu proyecto",
+      subtitle:
+        "Cuéntanos qué quieres lograr y te respondemos para definir el mejor camino. La primera llamada es para entender el problema, no para vender.",
+      infoTitle: "Información de contacto",
+      infoSubtitle: "Estamos disponibles para resolver tus dudas y acompañarte desde el primer día.",
+      emailLabel: "Correo",
+      whatsappLabel: "WhatsApp",
+      locationLabel: "Ubicación",
+      city: "Barranquilla, Colombia",
+      fields: {
+        name: "Nombre completo",
+        email: "Correo electrónico",
+        company: "Empresa",
+        phone: "Teléfono",
+        projectType: "Tipo de proyecto",
+        projectTypePlaceholder: "Selecciona una opción",
+        message: "Mensaje",
+      },
+      projectTypes: [
+        "Plataforma web a medida",
+        "Aplicación móvil",
+        "CRM o herramienta interna",
+        "Automatización de procesos",
+        "Integración de sistemas",
+        "IA y datos",
+        "Arquitectura cloud",
+        "Otro",
+      ],
+      submit: "Enviar por WhatsApp",
+      success: "¡Listo! Preparamos tu mensaje y abrimos WhatsApp para enviarlo.",
+      errors: {
+        name: "Ingresa tu nombre completo.",
+        email: "Ingresa tu correo electrónico.",
+        emailInvalid: "Correo electrónico no válido.",
+        phoneInvalid: "Teléfono no válido.",
+        projectType: "Selecciona un tipo de proyecto.",
+        message: "Cuéntanos sobre tu proyecto.",
+        messageShort: "El mensaje es demasiado corto.",
+      },
+      waGreeting: "Hola Scale Labs, soy",
+      waCompany: "Empresa",
+      waType: "Tipo de proyecto",
+      waMessage: "Mensaje",
     },
     a11y: {
       openMenu: "Abrir menú",
@@ -337,11 +409,6 @@ export const dictionary: Record<Locale, Dictionary> = {
         { title: "Production", description: "Dockerized deployment, data and support so the product keeps growing." },
       ],
     },
-    cta: {
-      title: "Have a similar project in mind?",
-      description:
-        "Tell us what you need to build. The first call is to understand the problem, not to sell.",
-    },
     footer: {
       tagline: "Scale Labs project portfolio.",
       backToSite: "Go to the main site",
@@ -351,6 +418,50 @@ export const dictionary: Record<Locale, Dictionary> = {
     contact: {
       whatsapp: "Message us on WhatsApp",
       call: "Call",
+      eyebrow: "Contact",
+      title: "Let's talk about your project",
+      subtitle:
+        "Tell us what you want to achieve and we'll get back to you to define the best path. The first call is to understand the problem, not to sell.",
+      infoTitle: "Contact information",
+      infoSubtitle: "We're available to answer your questions and work with you from day one.",
+      emailLabel: "Email",
+      whatsappLabel: "WhatsApp",
+      locationLabel: "Location",
+      city: "Barranquilla, Colombia",
+      fields: {
+        name: "Full name",
+        email: "Email address",
+        company: "Company",
+        phone: "Phone",
+        projectType: "Project type",
+        projectTypePlaceholder: "Select an option",
+        message: "Message",
+      },
+      projectTypes: [
+        "Custom web platform",
+        "Mobile app",
+        "CRM or internal tool",
+        "Process automation",
+        "Systems integration",
+        "AI and data",
+        "Cloud architecture",
+        "Other",
+      ],
+      submit: "Send via WhatsApp",
+      success: "Done! We prepared your message and opened WhatsApp to send it.",
+      errors: {
+        name: "Enter your full name.",
+        email: "Enter your email address.",
+        emailInvalid: "Invalid email address.",
+        phoneInvalid: "Invalid phone number.",
+        projectType: "Select a project type.",
+        message: "Tell us about your project.",
+        messageShort: "The message is too short.",
+      },
+      waGreeting: "Hi Scale Labs, I'm",
+      waCompany: "Company",
+      waType: "Project type",
+      waMessage: "Message",
     },
     a11y: {
       openMenu: "Open menu",

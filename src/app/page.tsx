@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Work } from "@/components/sections/Work";
 import { Approach } from "@/components/sections/Approach";
-import { CTA } from "@/components/sections/CTA";
+import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
         <Hero />
         <Work />
         <Approach />
-        <CTA />
+        <Contact />
       </main>
       <Footer />
     </>

@@ -40,10 +40,10 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-24 pb-24 sm:pt-28"
+      className="relative flex min-h-svh flex-col overflow-hidden pt-24 pb-10 sm:justify-center sm:pt-28 sm:pb-24"
     >
       {/* ================= MÓVIL (< sm): apilado, centrado ================= */}
-      <div className="container-page flex flex-col items-center gap-6 text-center sm:hidden">
+      <div className="container-page flex flex-1 flex-col items-center justify-center gap-6 text-center sm:hidden">
         <Reveal immediate delay={BASE_DELAY} duration={1.6}>
           <p className="text-[10px] font-medium uppercase leading-snug tracking-[0.22em] text-(--color-gray)/70">
             {topLineLead} <span className="text-(--color-coral)">{topLineLast}</span>
@@ -145,12 +145,12 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Indicador de scroll, fijo al fondo de la sección (que ocupa toda la
-          pantalla). */}
+      {/* Indicador de scroll: en flujo al fondo en móvil (la sección ocupa
+          toda la pantalla), absoluto en escritorio. */}
       <a
         href="#trabajo"
         aria-label={t.a11y.goNext}
-        className="absolute inset-x-0 bottom-6 z-10 flex flex-col items-center gap-2 text-(--color-text-secondary) transition-colors hover:text-(--color-coral-deep) sm:bottom-8"
+        className="z-10 mt-6 flex flex-col items-center gap-2 text-(--color-text-secondary) transition-colors hover:text-(--color-coral-deep) sm:absolute sm:inset-x-0 sm:bottom-8 sm:mt-0"
       >
         <Mouse size={22} className="animate-bounce" />
         <span className="text-[11px] font-medium uppercase tracking-[0.2em]">{t.hero.scroll}</span>

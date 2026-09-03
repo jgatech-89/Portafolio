@@ -2,11 +2,11 @@
 
 Portafolio de proyectos de **Scale Labs**. One-page, Next.js 15 (App Router) +
 TypeScript + Tailwind CSS v4, animado con GSAP/ScrollTrigger y scroll suave con
-Lenis. Dockerizado.
+Lenis. Se despliega en Vercel.
 
 Comparte arquitectura y sistema visual con el landing de Scale Labs
-(`Desktop/Landing-Scale`): mismos tokens de marca (`src/app/globals.css`),
-misma tipografía (Inter), mismas primitivas de animación (`src/components/ui/`).
+(`Desktop/Landing-Scale`): mismos tokens de marca (`src/app/globals.css`), misma
+tipografía (Inter), mismas primitivas de animación (`src/components/ui/`).
 **No repite las secciones del landing** (equipo, servicios, métricas, FAQ) — este
 sitio es solo el trabajo construido.
 
@@ -17,7 +17,7 @@ src/
   app/            layout, page, globals.css (tokens de marca)
   components/
     layout/       Navbar (sin enlaces de sección), Footer
-    sections/     Hero · Work · Approach · CTA
+    sections/     Hero · Work · Approach · Contact
     ui/           Reveal, SplitReveal, Magnetic, Parallax, StaircaseTag,
                   CustomCursor, PageLoader, Button, ContactOptions, SectionHeading
     providers/    SmoothScroll (Lenis + GSAP)
@@ -29,27 +29,32 @@ public/
   projects/       Capturas de cada proyecto
 ```
 
+## Desarrollo local
+
+Requiere **Node 18+** y **pnpm**.
+
+```bash
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm build    # build de producción
+```
+
 ## Contenido
 
 - **Proyectos:** `src/i18n/dictionary.ts` → `work.projects` (ES y EN). Cada uno con
   portada, galería, features, stack y `rightsReserved`.
 - **Contacto:** `src/data/site.ts` — email `scalelabs.info@gmail.com`,
-  WhatsApp `573023694545`. `url` y `social` siguen en placeholder.
+  WhatsApp `573023694545`. El formulario de la sección Contacto arma el mensaje y
+  abre `wa.me` con el resumen.
 
-## Docker
+## Despliegue (Vercel)
 
-```bash
-# Producción (Next standalone) — http://localhost:3003
-docker compose up -d --build scale-portfolio
-
-# Desarrollo con hot-reload — http://localhost:3003
-docker compose --profile dev up --build scale-portfolio-dev
-```
-
-Puerto 3003 (el landing usa 3002; la vieja landing en Vite usaba 5173 / 8080).
+Autodetección de Next.js — sin `vercel.json`. En **Project → Settings → Build and
+Deployment** el Framework Preset debe ser **Next.js** y los comandos en automático
+(el proyecto venía de una app Vite; si quedaron overrides de `vite build` /
+output `dist`, quitarlos).
 
 ## Pendiente antes de publicar
 
 - `src/data/site.ts` → `url` (dominio real, alimenta `metadataBase` / Open Graph)
   y `social` (cuentas reales; el Footer no muestra el ícono sin href).
-- Deploy a Vercel cuando esté el dominio.
